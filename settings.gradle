@@ -4,9 +4,13 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
-        mavenLocal()
+        maven {
+            url uri('./repo')
+        }
     }
 }
 rootProject.name = "ModularizationTools"
 include ':app'
 include ':GradlePlugin'
+include ':testModularization'
+include ':testmodulation2'

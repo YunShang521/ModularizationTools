@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/ModularizationTools.iml" filepath="$PROJECT_DIR$/.idea/modules/ModularizationTools.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/GradlePlugin/ModularizationTools.GradlePlugin.iml" filepath="$PROJECT_DIR$/.idea/modules/GradlePlugin/ModularizationTools.GradlePlugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ModularizationTools.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ModularizationTools.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/testModularization/ModularizationTools.testModularization.iml" filepath="$PROJECT_DIR$/.idea/modules/testModularization/ModularizationTools.testModularization.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/testmodulation2/ModularizationTools.testmodulation2.iml" filepath="$PROJECT_DIR$/.idea/modules/testmodulation2/ModularizationTools.testmodulation2.iml" />
     </modules>
   </component>
 </project>

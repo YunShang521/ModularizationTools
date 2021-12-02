@@ -1,0 +1,19 @@
+apply plugin: 'CModularzation'
+
+android{
+    sourceSets {
+        main {
+            if (isApplaction.toBoolean()) {//组件模式下
+                manifest.srcFile 'src/module/AndroidManifest.xml'
+                java.srcDirs 'src/module/java', 'src/main/java'
+                res.srcDirs 'src/module/res', 'src/main/res'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                resources {
+                    exclude 'src/debug/*'
+                }
+            }
+        }
+    }
+}
+

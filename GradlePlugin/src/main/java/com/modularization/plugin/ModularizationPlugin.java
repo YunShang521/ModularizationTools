@@ -7,32 +7,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModularizationPlugin implements Plugin<Project> {
+    String compilemodule = "app";
 
     @Override
     public void apply(Project project) {
         List<String> taskNames =  project.getGradle().getStartParameter().getTaskNames();
         System.out.println("taskNames--------- " +taskNames.toString());
-        System.out.println("project.getPath -------- " +  project.getPath());
+        System.out.println(" project.getPath -------- " +  project.getPath());
         String module = project.getPath().replace(":", "");
         System.out.println("module -------- " + module);
         CurrTask currTask = getTaskInfo(taskNames);
 
         //对于isRunAlone==true的情况需要根据实际情况修改其值，
         // 但如果是false，则不用修改，该module作为一个lib，运行module:assembleRelease则发布aar到中央仓库
-        boolean isLibrary = true;
+        boolean isApplaction = true;
 
-        String mainModuleName= project.getRootProject().property("main.module.name").toString();
-        System.out.println("mainmodulename--------- " + mainModuleName);
+        String mainmodulename= project.getRootProject().property("main.module.name").toString();
+        System.out.println("mainmodulename--------- " + mainmodulename);
 
         //对于要编译的组件和主项目，isRunAlone修改为true，其他组件都强制修改为false
         //这就意味着组件不能引用主项目，这在层级结构里面也是这么规定的
-        if (!module.equals(mainModuleName)&&(currTask.isUpload || !taskNames.toString().contains(project.getPath()))) {
-            isLibrary = true;
+        if ((!module.equals(mainmodulename))&&(currTask.isUpload || (taskNames.toString().contains("assemble")&& !taskNames.toString().contains(project.getPath())))) {
+            isApplaction = false;
         } else {
-            isLibrary = false;
+            isApplaction = true;
         }
-        project.getExtensions().add("isLibrary",isLibrary);
+        System.out.println("isApplaction--------- " + isApplaction);
+        project.getExtensions().add("isApplaction",isApplaction);
+        if (isApplaction) {
+            project.getPluginManager().apply("com.android.application");
+            System.out.println("apply plugin is com.android.application");
+        }else{
+            project.getPluginManager().apply("com.android.library") ;
+            System.out.println("apply plugin is com.android.library");
+        }
+
     }
+
 
     private CurrTask getTaskInfo(List<String> taskNames) {
         CurrTask assembleTask = new CurrTask();
